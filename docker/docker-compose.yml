@@ -1,0 +1,15 @@
+version: "3"
+services:
+  template:
+    image: alpine:latest
+    restart: unless-stopped
+    ports:
+      - 8080:80
+    environment:
+      - A=B
+      - C=D
+    volumes:
+      - template-data:/data
+
+volumes:
+  template-data:
