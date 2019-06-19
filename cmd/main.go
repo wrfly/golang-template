@@ -5,6 +5,8 @@ import (
 	"os"
 
 	"gopkg.in/urfave/cli.v2"
+
+	"github.com/wrfly/golang-template/config"
 )
 
 var appName = "template-app"
@@ -45,10 +47,26 @@ func main() {
 			if c.NumFlags() == 0 {
 				return cli.ShowAppHelp(c)
 			}
-			if c.Bool("version") {
+			switch {
+			case c.Bool("version"):
 				fmt.Println(versionInfo)
 				return nil
+			case c.Bool("env-list"):
+				config.EnvList()
+				return nil
+			case c.Bool("example"):
+				if err := config.Example(); err != nil {
+					panic(err)
+				}
+				return nil
 			}
+
+			// main logic here
+			cfg, err := config.New(c.String("config"))
+			if err != nil {
+				panic(err)
+			}
+			fmt.Println("got port", cfg.Port)
 
 			return nil
 		},
