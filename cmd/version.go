@@ -27,7 +27,7 @@ var versionInfo = fmt.Sprintf(versionInfoTemplate,
 	strings.Replace(BuildAt, ".", " ", 1),
 )
 
-var simpleVersionInfo = fmt.Sprintf("%s ->%s @%s",
+var simpleVersionInfo = fmt.Sprintf("%s @%s v%s",
 	Commit, Branch, Version,
 )
 
